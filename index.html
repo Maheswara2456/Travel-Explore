@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAVEL EXPLORE</title>
-    <link rel="stylesheet" href="mahesh/chatbot.css">
-<script src="mahesh/chatbot.js"></script>
+    <link rel="stylesheet" href="dharshan/chatbot.css">
+<link rel="stylesheet" href="style.css">
+
 
 
     <style>
@@ -45,14 +46,12 @@
             text-align: center;
             margin: 60px auto;
             padding: 30px;
-            /* NOTE: Changed to Deep Charcoal for premium look */
             background: #343A40; 
             border-radius: 10px;
             max-width: 1200px;
         }
 
         .explore-section h2 {
-            /* NOTE: Changed to Gold for premium look */
             color: #CCA64C; 
             margin-bottom: 20px;
         }
@@ -68,7 +67,6 @@
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            /* NOTE: Added subtle shadow for premium look */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
             cursor: pointer;
             transition: transform 0.2s;
@@ -90,13 +88,12 @@
             font-size: 16px;
             color: #333;
         }
-        
-        /* --- Map Results Container --- */
+
         #map-results {
             text-align: center;
             margin: 40px auto;
             max-width: 1000px; 
-            padding-bottom: 80px; /* Space above chatbot */
+            padding-bottom: 80px;
         }
 
         #map-frame {
@@ -106,7 +103,6 @@
             border-radius: 8px;
         }
 
-        /* --- Chat toggle (remains the same) --- */
         #chat-toggle {
             position: fixed;
             bottom: 20px;
@@ -123,7 +119,6 @@
             z-index: 1000;
         }
 
-        /* --- Chatbot Box (remains the same) --- */
         #chatbot-box {
             position: fixed;
             bottom: 90px;
@@ -241,7 +236,6 @@
     </div>
 
     <script>
-        // ===== Header Toggle =====
         function updateHeaderState() {
             const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
             document.getElementById("logged-out-header").style.display = isLoggedIn ? "none" : "flex";
@@ -249,7 +243,6 @@
         }
         updateHeaderState();
 
-        // ===== Nearby Places (FIXED) =====
         function findNearby(type) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -258,30 +251,15 @@
                     let search_query = ""; 
 
                     switch (type) {
-                        case "hotels":
-                            search_query = "Hotels near me";
-                            break;
-                        case "restaurants":
-                            search_query = "Restaurants near me";
-                            break;
-                        case "shopping":
-                            search_query = "Shopping Malls near me";
-                            break;
-                        case "travels":
-                            search_query = "Tourist Attractions near me";
-                            break;
-                        case "cinema":
-                            search_query = "Cinemas near me"; 
-                            break;
-                        default:
-                            alert("Unknown category");
-                            return;
+                        case "hotels": search_query = "Hotels near me"; break;
+                        case "restaurants": search_query = "Restaurants near me"; break;
+                        case "shopping": search_query = "Shopping Malls near me"; break;
+                        case "travels": search_query = "Tourist Attractions near me"; break;
+                        case "cinema": search_query = "Cinemas near me"; break;
+                        default: alert("Unknown category"); return;
                     }
 
-                    // Google Maps Embed URL for searching near current location
                     const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(search_query)}&ll=${lat},${lon}&z=15&output=embed`;
-
-                    // Update the iframe source
                     document.getElementById('map-frame').src = embedUrl;
 
                 }, (error) => {
@@ -292,34 +270,26 @@
             }
         }
 
-        // ===== Open Specific City (FIXED) =====
         function openMap(place) {
-            // Google Maps Embed URL for searching a specific place
             const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(place)}&z=10&output=embed`;
-            
-            // Update the iframe source
             document.getElementById('map-frame').src = embedUrl;
         }
 
-        // ===== Sidebar =====
         const menuToggle = document.getElementById("menu-toggle");
-        if (menuToggle) {
-            menuToggle.onclick = function () {
-                document.getElementById("sidebar-menu").classList.toggle("open");
-            };
-        }
+        if (menuToggle) menuToggle.onclick = () => document.getElementById("sidebar-menu").classList.toggle("open");
 
-        // ===== Logout =====
         const logoutLink = document.getElementById("logout-link");
-        if (logoutLink) {
-            logoutLink.onclick = function (e) {
-                e.preventDefault();
-                localStorage.setItem("isLoggedIn", "false");
-                location.reload();
-            };
-        }
+        if (logoutLink) logoutLink.onclick = function (e) {
+            e.preventDefault();
+            localStorage.setItem("isLoggedIn", "false");
+            location.reload();
+        };
     </script>
 
-    <script src="dharshan/chatbot.js"></script>
+    <!-- ✅ FIXED (Correct Path) -->
+   <script src="dharshan/chatbot.js"></script>
+
+
+
 </body>
 </html>
